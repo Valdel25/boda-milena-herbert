@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Milena & Herbert — 10.10.2026</title>
+<meta name="theme-color" content="#4B5C33">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --olive:#4B5C33;
+    --olive-deep:#3A4626;
+    --olive-pastel:#AABB8C;
+    --sage:#8BA696;
+    --blush:#DDA6A6;
+    --blush-soft:#F1DEDA;
+    --champagne:#D9CBA8;
+    --gold:#B8964F;
+    --lavender:#B7AED0;
+    --stone:#DCD3B8;
+    --cream:#F8F5EC;
+    --cream-deep:#EFE8D6;
+    --ink:#3A3226;
+    --ink-soft:#79705D;
+    --ink-on-olive:#F3EFE2;
+    --ink-on-olive-soft:#C9D2B5;
+    --line:rgba(59,66,40,0.22);
+    --line-on-olive:rgba(243,239,226,0.35);
+    --shadow-soft:0 10px 30px rgba(45,54,28,0.14);
+    --radius-md:14px;
+    --radius-sm:10px;
+    --sp-1:6px; --sp-2:12px; --sp-3:20px; --sp-4:32px; --sp-5:48px; --sp-6:72px;
+    --font-script:'Cormorant Garamond', serif;
+    --font-display:'Cormorant Garamond', serif;
+    --font-body:'Cormorant Garamond', serif;
+    --ease:cubic-bezier(.22,.9,.32,1);
+  }
+
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; font-size:18px; }
+  body{ margin:0; min-height:100vh; font-family:var(--font-body); color:var(--ink); background:var(--cream); -webkit-font-smoothing:antialiased; }
+
+  .app{ position:relative; max-width:480px; margin:0 auto; overflow:hidden; }
+  @media (min-width:560px){
+    body{ padding:40px 16px; background:var(--cream-deep); }
+    .app{ box-shadow:var(--shadow-soft); }
+  }
+
+  .progress-track{ position:fixed; top:0; left:0; right:0; height:3px; z-index:50; background:rgba(59,66,40,0.10); }
+  .progress-fill{ height:100%; width:0%; background:linear-gradient(90deg, var(--blush), var(--olive)); transition:width .12s linear; }
+
+  section{ padding:var(--sp-6) var(--sp-4); opacity:0; transform:translateY(16px); transition:opacity .8s var(--ease), transform .8s var(--ease); position:relative; overflow:hidden; }
+  section.revealed{ opacity:1; transform:translateY(0); }
+  .block-olive{ background:var(--olive); color:var(--ink-on-olive); }
+  .block-cream{ background:var(--cream); color:var(--ink); }
+
+  .wave-divider{ position:absolute; top:-1px; left:0; right:0; height:20px; line-height:0; overflow:hidden; pointer-events:none; }
+  .wave-divider svg{ width:100%; height:100%; display:block; }
+
+  .eyebrow{ font-family:var(--font-body); font-weight:600; letter-spacing:.26em; text-transform:uppercase; font-size:.7rem; margin:0 0 var(--sp-2); text-align:center; }
+  .block-cream .eyebrow{ color:var(--olive); }
+  .block-olive .eyebrow{ color:var(--ink-on-olive-soft); }
+  .section-title{ font-family:var(--font-display); font-weight:500; font-size:1.7rem; margin:0 0 var(--sp-3); text-align:center; }
+  .block-cream .section-title{ color:var(--olive-deep); }
+  .block-olive .section-title{ color:var(--ink-on-olive); }
+
+  .sr-only-defs{ position:absolute; width:0; height:0; overflow:hidden; }
+
+  /* ============ FLORALES (recortes de la ilustración) ============ */
+  .flora{ position:absolute; pointer-events:none; z-index:0; height:auto; }
+  .flora--tl{ top:0; left:0; width:170px; }
+  .flora--tr{ top:0; right:0; width:165px; }
+  .flora--bl{ bottom:0; left:0; width:190px; }
+  .flora--br{ bottom:0; right:0; width:160px; }
+  .cover .cover-br{ bottom:8%; width:128px; }
+  .sprig{ position:absolute; top:50%; width:26px; height:auto; transform:translateY(-50%); opacity:.95; }
+  .sprig--l{ left:calc(50% - 92px); }
+  .sprig--r{ right:calc(50% - 92px); transform:translateY(-50%) scaleX(-1); }
+  .divider-heart{ display:block; width:150px; height:auto; margin:0 auto var(--sp-4); }
+  .divider-heart--tight{ margin:calc(-1*var(--sp-2)) auto var(--sp-3); }
+  .block-olive .divider-heart{ filter:brightness(1.35) saturate(.8); }
+  /* (los estilos vectoriales de abajo ya no se usan) */
+  .floral{ position:absolute; pointer-events:none; z-index:0; }
+  .floral--hero-tl{ top:-10px; left:-16px; width:150px; height:150px; }
+  .floral--hero-br{ bottom:-14px; right:-16px; width:150px; height:150px; transform:rotate(180deg); }
+  .floral--corner-l{ position:absolute; left:-10px; top:-8px; width:90px; height:90px; }
+  .floral--corner-r{ position:absolute; right:-10px; top:-8px; width:90px; height:90px; transform:scaleX(-1); }
+  .floral--footer-l{ bottom:-10px; left:-14px; width:130px; height:130px; transform:scaleY(-1); }
+  .floral--footer-r{ bottom:-10px; right:-14px; width:130px; height:130px; transform:scale(-1,-1); }
+  .garland{ display:block; width:100%; max-width:320px; height:auto; margin:0 auto var(--sp-3); }
+  section > *:not(.floral):not(.flora):not(.wave-divider){ position:relative; z-index:1; }
+
+  /* ============ COVER ============ */
+  .cover{ text-align:center; clip-path:polygon(0 0,100% 0,100% 86%,50% 100%,0 86%); padding:120px var(--sp-4) 150px; }
+  .cover-date{ font-size:.78rem; letter-spacing:.2em; text-transform:uppercase; color:var(--ink-on-olive-soft); margin-top:var(--sp-2); }
+  .scroll-cue{ margin:var(--sp-3) auto 0; width:30px; height:30px; border-radius:50%; border:1px solid var(--line-on-olive); background:none; color:var(--ink-on-olive-soft); font-size:.95rem; cursor:pointer; display:flex; align-items:center; justify-content:center; animation:bob 2.2s ease-in-out infinite; }
+  @keyframes bob{ 0%,100%{ transform:translateY(0);} 50%{ transform:translateY(6px);} }
+
+  /* ============ MONOGRAMA / INTRO ============ */
+  .monogram-wrap{ position:relative; display:flex; justify-content:center; margin-top:var(--sp-2); }
+  .monogram{ display:flex; align-items:center; justify-content:center; gap:14px; font-family:var(--font-display); font-size:2.1rem; color:var(--olive-deep); }
+  .monogram .divider{ width:1px; height:26px; background:var(--line); }
+  .tagline{ font-family:var(--font-display); font-style:italic; font-size:1.7rem; text-align:center; color:var(--olive-deep); margin:var(--sp-3) 0 6px; }
+  .tagline-sub{ text-align:center; font-size:1rem; color:var(--ink-soft); margin:0 0 var(--sp-4); line-height:1.55; }
+  .intro-copy{ text-align:center; font-size:1rem; color:var(--ink-soft); line-height:1.7; margin:var(--sp-3) 0 var(--sp-4); }
+
+  .script-names{ text-align:center; margin:var(--sp-4) 0; }
+  .script-names span{ display:block; font-family:var(--font-script); font-style:italic; font-weight:500; font-size:2.9rem; line-height:1.12; color:var(--olive-deep); }
+  .script-names .amp{ font-size:1.6rem; color:var(--blush); margin:2px 0; }
+  .cover .script-names span{ color:var(--ink-on-olive); font-size:2.55rem; }
+  .cover .script-names .amp{ font-size:1.35rem; color:var(--ink-on-olive-soft); }
+  .honor-line{ text-align:center; font-size:.72rem; letter-spacing:.2em; text-transform:uppercase; color:var(--ink-soft); margin:0 0 var(--sp-4); }
+
+  .date-block{ display:flex; align-items:center; justify-content:center; gap:var(--sp-3); }
+  .date-block .rule{ flex:1; max-width:56px; height:1px; background:var(--line); }
+  .date-block .side{ font-size:.72rem; letter-spacing:.2em; text-transform:uppercase; color:var(--ink-soft); text-align:center; }
+  .date-block .big-day{ text-align:center; }
+  .date-block .big-day .month{ font-size:.68rem; letter-spacing:.25em; text-transform:uppercase; color:var(--ink-soft); display:block; margin-bottom:2px; }
+  .date-block .big-day .num{ font-family:var(--font-display); font-size:2.6rem; color:var(--olive-deep); line-height:1; }
+
+  .photo-slot{ width:100%; aspect-ratio:4/5; border:1.5px dashed var(--line); border-radius:var(--radius-md); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px; color:var(--ink-soft); background:var(--cream-deep); margin:var(--sp-3) 0; }
+  .photo-slot--inverse{ border-color:var(--line-on-olive); background:rgba(255,255,255,0.06); color:var(--ink-on-olive-soft); }
+  .photo-slot svg{ width:32px; height:32px; opacity:.7; }
+  .photo-slot span{ font-size:.68rem; text-transform:uppercase; letter-spacing:.1em; }
+
+  .mini-cal{ margin-top:var(--sp-3); max-width:300px; margin-left:auto; margin-right:auto; }
+  .mini-cal-title{ text-align:center; font-family:var(--font-display); font-style:italic; font-size:1.1rem; color:var(--olive-deep); margin:0 0 2px; }
+  .mini-cal-month{ margin:0 0 var(--sp-2); }
+  .mini-cal-grid{ display:flex; flex-wrap:wrap; text-align:center; }
+  .mini-cal-grid > span{ flex:0 0 14.28%; box-sizing:border-box; }
+  .mini-cal-dow{ font-size:.66rem; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-soft); font-weight:600; padding-bottom:6px; }
+  .mini-cal-grid span:not(.mini-cal-dow){ font-size:.9rem; color:var(--ink); padding:7px 0; }
+  .mini-cal-highlight{ position:relative; overflow:visible; }
+  .mini-cal-highlight b{ position:relative; z-index:1; font-weight:700; color:var(--olive-deep); }
+  .cal-heart{ position:absolute; left:50%; top:50%; width:40px; height:36px; transform:translate(-50%,-52%); pointer-events:none; }
+
+  /* ============ HISTORIA + COUNTDOWN ============ */
+  .story-copy{ text-align:center; font-size:1rem; line-height:1.7; color:var(--ink-on-olive-soft); margin:0 0 var(--sp-4); }
+  .date-recap{ text-align:center; font-size:.72rem; letter-spacing:.18em; text-transform:uppercase; color:var(--ink-on-olive-soft); margin:0 0 var(--sp-4); }
+  .countdown-label{ text-align:center; font-size:.72rem; letter-spacing:.3em; text-transform:uppercase; color:var(--ink-on-olive-soft); margin:0 0 var(--sp-2); }
+  .countdown-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:var(--sp-2); }
+  .count-unit{ text-align:center; }
+  .count-unit span{ display:block; font-family:var(--font-display); font-size:2.1rem; color:var(--blush-soft); font-weight:600; }
+  .count-unit label{ display:block; font-size:.6rem; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-on-olive-soft); margin-top:2px; }
+
+  /* ============ UBICACIÓN ============ */
+  .venue-name{ font-family:var(--font-display); font-size:1.25rem; color:var(--olive-deep); margin:0 0 4px; text-align:center; }
+  .venue-address{ font-size:1rem; color:var(--ink-soft); margin:0 0 var(--sp-3); line-height:1.5; text-align:center; }
+
+  .btn-row{ display:flex; gap:var(--sp-2); flex-wrap:wrap; }
+  .btn{ flex:1 1 auto; text-align:center; padding:12px 16px; border-radius:999px; font-family:var(--font-body); font-size:.92rem; font-weight:600; letter-spacing:.03em; text-decoration:none; cursor:pointer; border:1px solid transparent; transition:transform .25s var(--ease), background .25s; }
+  .btn:active{ transform:scale(.97); }
+  .btn-solid{ background:var(--olive); color:var(--cream); }
+  .btn-solid:hover{ background:var(--olive-deep); }
+  .btn-outline{ background:transparent; color:var(--olive); border-color:var(--olive); }
+  .btn-outline:hover{ background:rgba(75,92,51,0.08); }
+  .btn-cream-solid{ background:var(--cream); color:var(--olive-deep); }
+  .btn-cream-outline{ background:transparent; color:var(--ink-on-olive); border-color:var(--line-on-olive); }
+  .btn-cream-outline:hover{ background:rgba(255,255,255,0.08); }
+  .btn-block{ width:100%; }
+
+  /* ============ ITINERARIO (centrado) ============ */
+  .itin-head{ text-align:center; margin-top:var(--sp-6); }
+  .itin-pre{ display:block; font-style:italic; font-size:1.25rem; color:var(--olive); line-height:1; margin-bottom:-2px; }
+  .itin-title{ letter-spacing:.2em; text-transform:uppercase; font-weight:500; margin-bottom:2px; }
+  .itin-heart{ display:block; font-size:1rem; color:var(--olive); margin-bottom:var(--sp-4); }
+  .tl{ position:relative; max-width:330px; margin:0 auto var(--sp-6); }
+  .tl::before{ content:''; position:absolute; left:calc(60px + 13px); top:22px; bottom:22px; width:1px; background:var(--olive); opacity:.55; }
+  .tl-row{ display:flex; align-items:center; padding:13px 0; }
+  .tl-icon{ flex:0 0 60px; display:flex; justify-content:center; color:var(--olive-deep); }
+  .tl-icon svg{ width:34px; height:34px; }
+  .tl-dot{ flex:0 0 7px; width:7px; height:7px; border-radius:50%; background:var(--olive); margin:0 10px; }
+  .tl-text{ flex:1; display:flex; flex-direction:column; gap:3px; padding-left:8px; text-align:left; }
+  .tl-time{ font-size:.82rem; letter-spacing:.14em; color:var(--olive); font-weight:600; }
+  .tl-label{ font-size:.86rem; letter-spacing:.1em; text-transform:uppercase; color:var(--ink); }
+  .flora--itin{ width:170px; bottom:-6px; }
+  #ubicacion{ padding-bottom:150px; }
+  .itinerary-note{ text-align:center; font-family:var(--font-display); font-style:italic; font-size:1rem; color:var(--olive-deep); margin:0 0 var(--sp-4); }
+  .timeline{ position:relative; display:flex; flex-direction:column; align-items:center; }
+  .timeline::before{ content:''; position:absolute; top:22px; bottom:22px; left:50%; width:1px; background:var(--line); }
+  .timeline-item{ position:relative; z-index:1; display:flex; flex-direction:column; align-items:center; text-align:center; padding-bottom:var(--sp-4); }
+  .timeline-item:last-child{ padding-bottom:0; }
+  .timeline-icon{ width:44px; height:44px; border-radius:50%; background:var(--cream-deep); border:1px solid var(--line); color:var(--olive-deep); display:flex; align-items:center; justify-content:center; margin-bottom:8px; }
+  .timeline-time{ font-size:.68rem; letter-spacing:.12em; text-transform:uppercase; color:var(--olive); font-weight:600; margin:0 0 2px; }
+  .timeline-label{ font-family:var(--font-display); font-style:italic; font-size:1.05rem; color:var(--olive-deep); margin:0; }
+
+  /* ============ DRESS CODE ============ */
+  .photo-arch{ position:relative; width:100%; max-width:300px; margin:var(--sp-4) auto var(--sp-3); }
+  .photo-arch img{ display:block; width:100%; aspect-ratio:4/5; object-fit:cover; border-radius:999px 999px 14px 14px; border:1px solid var(--line); box-shadow:0 12px 30px rgba(45,54,28,0.20); }
+  .photo-arch-floral{ position:absolute; width:96px; height:96px; pointer-events:none; }
+  .photo-arch-floral--tl{ top:-26px; left:-34px; }
+  .photo-arch-floral--br{ bottom:-24px; right:-34px; transform:rotate(180deg); }
+  .photo-arch--inverse img{ border-color:var(--line-on-olive); box-shadow:0 12px 30px rgba(0,0,0,0.30); }
+
+  .dresscode-art{ display:block; width:calc(100% + 2*var(--sp-4)); margin-left:calc(-1*var(--sp-4)); margin-right:calc(-1*var(--sp-4)); height:auto; }
+
+  .music-fab{ position:fixed; bottom:20px; right:20px; z-index:40; width:46px; height:46px; border-radius:50%; background:var(--olive); border:1px solid rgba(255,255,255,0.25); color:var(--cream); font-size:1rem; cursor:pointer; box-shadow:var(--shadow-soft); display:flex; align-items:center; justify-content:center; }
+  .music-fab.playing{ animation:pulse 1.8s ease-in-out infinite; }
+  @keyframes pulse{ 0%,100%{ box-shadow:0 0 0 0 rgba(75,92,51,.35);} 50%{ box-shadow:0 0 0 8px rgba(75,92,51,0);} }
+  .attire-icon{ display:flex; justify-content:center; margin:0 0 var(--sp-2); color:var(--ink-on-olive); }
+  .attire-icon svg{ width:48px; height:48px; }
+  .dc-sub{ text-align:center; font-family:var(--font-display); font-style:italic; font-size:1rem; color:var(--ink-on-olive-soft); margin:0 0 var(--sp-4); }
+  .dc-columns{ display:grid; grid-template-columns:1fr 1fr; gap:var(--sp-3); }
+  .dc-col{ text-align:center; }
+  .dc-col h3{ font-family:var(--font-body); font-weight:600; font-size:.72rem; letter-spacing:.18em; text-transform:uppercase; color:var(--ink-on-olive); margin:0 0 var(--sp-2); }
+  .dc-col p{ font-size:.78rem; color:var(--ink-on-olive-soft); line-height:1.6; margin:0 0 var(--sp-2); }
+  .dc-col .avoid-label{ font-size:.62rem; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-on-olive-soft); margin:var(--sp-2) 0 6px; }
+  .swatches{ display:flex; gap:8px; justify-content:center; }
+  .swatch{ width:22px; height:22px; border-radius:50%; border:1px solid var(--line-on-olive); position:relative; }
+  .swatch::after{ content:'✕'; position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-size:.6rem; color:rgba(0,0,0,.55); text-shadow:0 0 2px rgba(255,255,255,.5); }
+  .dc-rule{ width:1px; background:var(--line-on-olive); }
+
+  /* ============ SOBRES / RSVP EXTRAS ============ */
+  .sobres-copy{ font-size:1rem; color:var(--ink); line-height:1.7; margin:0; text-align:center; }
+  .block-olive .sobres-copy{ color:var(--ink-on-olive); }
+  .block-olive .info-row svg{ color:var(--ink-on-olive-soft); }
+  .block-olive .info-row h3{ color:var(--ink-on-olive); }
+  .block-olive .info-row p{ color:var(--ink-on-olive-soft); }
+  .sobres-icon{ display:flex; justify-content:center; margin:0 0 var(--sp-3); }
+  .sobres-icon svg{ width:34px; height:34px; color:var(--olive); }
+  .info-strip{ display:flex; flex-direction:column; gap:var(--sp-4); margin-top:var(--sp-4); }
+  .info-row{ display:flex; align-items:flex-start; gap:14px; }
+  .info-row svg{ width:26px; height:26px; flex:0 0 auto; color:var(--olive); margin-top:2px; }
+  .info-row h3{ font-family:var(--font-body); font-weight:600; font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--olive-deep); margin:0 0 4px; }
+  .info-row p{ font-size:.82rem; color:var(--ink-soft); line-height:1.55; margin:0; }
+
+  /* ============ RSVP ============ */
+  .greet-name{ text-align:center; font-family:var(--font-display); font-style:italic; font-size:1.3rem; color:var(--ink-on-olive); margin:0 0 var(--sp-3); }
+  .seats-block{ text-align:center; margin:0 0 var(--sp-4); }
+  .seats-label{ font-size:.82rem; letter-spacing:.2em; text-transform:uppercase; color:var(--ink-on-olive-soft); margin:0; }
+  .seats-icon{ width:52px; height:44px; display:block; margin:0 auto 6px; }
+  .seats-line{ display:flex; align-items:center; justify-content:center; margin:10px 0 0; font-size:.82rem; letter-spacing:.2em; text-transform:uppercase; color:var(--ink-on-olive); }
+  .seats-box{ min-width:58px; height:66px; padding:0 10px; margin:0 18px; border:1.5px solid var(--ink-on-olive); border-radius:9px; display:flex; align-items:center; justify-content:center; font-family:var(--font-display); font-size:2.4rem; font-weight:500; letter-spacing:0; line-height:1; }
+  .rsvp-copy{ text-align:center; font-size:1rem; color:var(--ink-on-olive); line-height:1.6; margin:0 0 var(--sp-2); }
+  .rsvp-copy strong{ font-weight:700; }
+  .rsvp-copy--soft{ color:var(--ink-on-olive-soft); font-style:italic; }
+  .field{ margin-bottom:var(--sp-3); }
+  .field label{ display:block; font-size:.7rem; text-transform:uppercase; letter-spacing:.08em; color:var(--ink-on-olive-soft); margin-bottom:6px; }
+  .field input, .field textarea{ width:100%; padding:11px 13px; background:rgba(255,255,255,0.14); border:1px solid var(--line-on-olive); border-radius:var(--radius-sm); color:var(--ink-on-olive); font-family:var(--font-body); font-size:.9rem; resize:vertical; }
+  .field input::placeholder, .field textarea::placeholder{ color:rgba(243,239,226,0.5); }
+  .field input:focus, .field textarea:focus{ outline:2px solid var(--cream); outline-offset:1px; }
+  .segmented{ display:flex; gap:var(--sp-2); margin-bottom:var(--sp-3); }
+  .seg-btn{ flex:1; padding:11px; border-radius:var(--radius-sm); border:1px solid var(--line-on-olive); background:transparent; color:var(--ink-on-olive-soft); font-family:var(--font-body); font-size:.8rem; cursor:pointer; transition:background .25s, color .25s; }
+  .seg-btn.active{ background:var(--cream); color:var(--olive-deep); border-color:transparent; font-weight:500; }
+  .adults-note{ text-align:center; color:var(--ink-on-olive-soft); margin-top:var(--sp-3); }
+  .adults-note em{ display:block; font-size:1rem; font-style:italic; line-height:1.5; color:var(--ink-on-olive); margin-bottom:8px; }
+  .adults-note b{ display:block; font-weight:600; font-size:.74rem; letter-spacing:.22em; text-transform:uppercase; }
+
+  /* ============ FOOTER ============ */
+  .closing-quote{ text-align:center; font-family:var(--font-display); font-style:italic; font-size:1.7rem; color:var(--ink-on-olive); line-height:1.5; margin:0 0 var(--sp-4); }
+  #footer{ padding-top:150px; padding-bottom:150px; }
+  .footer-names{ font-family:var(--font-script); font-style:italic; font-weight:500; font-size:2rem; color:var(--ink-on-olive); margin:var(--sp-3) 0 0 !important; text-align:center; }
+  .footer-sub{ font-size:.68rem; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-on-olive-soft); text-align:center; margin-top:6px; }
+
+  .toast{ position:fixed; left:50%; bottom:24px; transform:translate(-50%,20px); background:rgba(30,32,20,0.92); border:1px solid rgba(255,255,255,0.15); color:#F8F5EC; padding:10px 18px; border-radius:999px; font-size:.78rem; z-index:60; opacity:0; pointer-events:none; transition:opacity .35s var(--ease), transform .35s var(--ease); max-width:80%; text-align:center; }
+  .toast.show{ opacity:1; transform:translate(-50%,0); }
+
+  @media (prefers-reduced-motion: reduce){
+    section, .scroll-cue{ animation:none !important; transition:none !important; }
+    section{ opacity:1; transform:none; }
+  }
+</style>
+</head>
+<body>
+
+<svg class="sr-only-defs" aria-hidden="true">
+  <defs>
+    <symbol id="icon-rings" viewBox="0 0 24 24"><circle cx="8" cy="12" r="5" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="15" cy="12" r="5" fill="none" stroke="currentColor" stroke-width="1.4"/></symbol>
+    <symbol id="icon-cocktail" viewBox="0 0 24 24"><path d="M7 3h10v4a5 5 0 01-10 0zM12 12v7M8 20h8" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/><path d="M8.5 6h7" stroke="currentColor" stroke-width="1" opacity=".6"/></symbol>
+    <symbol id="icon-sparkle" viewBox="0 0 24 24"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l3 3M15 15l3 3M18 6l-3 3M9 15l-3 3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></symbol>
+    <symbol id="icon-toast" viewBox="0 0 24 24"><path d="M5 3l1.4 6.2a2.6 2.6 0 002.6 2v7.8M5 3H3.2M5 3l3 .9" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/><path d="M19 3l-1.4 6.2a2.6 2.6 0 01-2.6 2v7.8M19 3h1.8M19 3l-3 .9" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/><path d="M6.5 19h3.5M14 19h3.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></symbol>
+    <symbol id="icon-plate" viewBox="0 0 24 24"><circle cx="9" cy="12" r="6" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M17 5v14M20 5v6a2 2 0 01-2 2" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></symbol>
+    <symbol id="icon-party" viewBox="0 0 24 24"><circle cx="7" cy="17" r="2.3" fill="currentColor"/><circle cx="16" cy="15" r="2.3" fill="currentColor"/><path d="M9.3 17V6l9-2v11" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></symbol>
+    <symbol id="icon-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M12 8v4l3 2" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="icon-camera" viewBox="0 0 24 24"><path d="M4 8h3l2-2h6l2 2h3v11H4z" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/><circle cx="12" cy="13" r="3.5" fill="none" stroke="currentColor" stroke-width="1.3"/></symbol>
+    <symbol id="icon-attire" viewBox="0 0 60 60">
+      <circle cx="18" cy="10" r="4" fill="none" stroke="currentColor" stroke-width="1.3"/>
+      <path d="M12 18 L18 14 L24 18 L22 40 L14 40 Z" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/>
+      <path d="M18 14 v6" stroke="currentColor" stroke-width="1.3"/>
+      <circle cx="42" cy="10" r="4" fill="none" stroke="currentColor" stroke-width="1.3"/>
+      <path d="M37 18 L42 15 L47 18 L52 40 L32 40 Z" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="icon-seat" viewBox="0 0 24 24"><path d="M6 4v10a2 2 0 002 2h8a2 2 0 002-2V4M6 4H4M6 4h3M18 4h2M18 4h-3M6 16v4M18 16v4M9 4v6h6V4" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="icon-envelope" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="13" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.3"/><path d="M4 7l8 6 8-6" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="icon-chat" viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4V5z" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></symbol>
+  </defs>
+</svg>
+
+<div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+<div class="toast" id="toast"></div>
+
+<div class="app">
+
+  <!-- ================= PORTADA ================= -->
+  <section class="block-olive cover revealed" id="hero">
+    <img class="flora flora--tl" src="flora-tl.png" alt="" aria-hidden="true">
+    <img class="flora flora--br cover-br" src="flora-br.png" alt="" aria-hidden="true">
+    <p class="eyebrow">Con la bendición de Dios</p>
+    <div class="script-names">
+      <span>Milena</span>
+      <span class="amp">&amp;</span>
+      <span>Herbert</span>
+    </div>
+    <p class="cover-date">10 · 10 · 2026 · 4:00 PM</p>
+    <button class="scroll-cue" id="scrollCue" aria-label="Desplázate para ver más">↓</button>
+  </section>
+
+  <!-- ================= INTRO ================= -->
+  <section class="block-cream" id="intro">
+    <div class="wave-divider"><svg viewBox="0 0 400 20" preserveAspectRatio="none"><path d="M0 20 Q100 0 200 10 T400 20 V20 H0 Z" fill="var(--cream)"/></svg></div>
+
+    <div class="monogram-wrap">
+      <img class="sprig sprig--l" src="flora-sprig.png" alt="" aria-hidden="true">
+      <div class="monogram"><span>M</span><span class="divider"></span><span>H</span></div>
+      <img class="sprig sprig--r" src="flora-sprig.png" alt="" aria-hidden="true">
+    </div>
+    <p class="tagline">¡Llegó el día que tanto soñamos!</p>
+    <p class="tagline-sub">Queremos vivirlo rodeados de las personas que más amamos.</p>
+
+    <div class="photo-arch">
+      <img src="foto-novios.jpg" alt="Milena y Herbert" loading="lazy">
+    </div>
+
+    <p class="intro-copy">Con el amor que nos une, la bendición de Dios y el cariño de los nuestros, queremos compartir contigo el día en que uniremos nuestras vidas para siempre.</p>
+
+    <div class="script-names">
+      <span>Milena</span>
+      <span class="amp">&amp;</span>
+      <span>Herbert</span>
+    </div>
+    <p class="honor-line">Tenemos el honor de invitarte a nuestra boda</p>
+
+    <div class="mini-cal">
+      <h2 class="section-title mini-cal-month">Octubre 2026</h2>
+      <div class="mini-cal-grid">
+        <span class="mini-cal-dow">Dom</span><span class="mini-cal-dow">Lun</span><span class="mini-cal-dow">Mar</span><span class="mini-cal-dow">Mié</span><span class="mini-cal-dow">Jue</span><span class="mini-cal-dow">Vie</span><span class="mini-cal-dow">Sáb</span>
+        <span></span><span></span><span></span><span></span><span>1</span><span>2</span><span>3</span>
+        <span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span class="mini-cal-highlight"><svg class="cal-heart" viewBox="0 0 40 36" aria-hidden="true"><path d="M20 33 C 6 24, 2 16, 4 10 C 6 4, 14 2, 20 9 C 26 2, 34 4, 36 10 C 38 16, 34 24, 20 33 Z" fill="none" stroke="var(--olive)" stroke-width="1.8" stroke-linejoin="round"/></svg><b>10</b></span>
+        <span>11</span><span>12</span><span>13</span><span>14</span><span>15</span><span>16</span><span>17</span>
+        <span>18</span><span>19</span><span>20</span><span>21</span><span>22</span><span>23</span><span>24</span>
+        <span>25</span><span>26</span><span>27</span><span>28</span><span>29</span><span>30</span><span>31</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= HISTORIA + COUNTDOWN ================= -->
+  <section class="block-olive" id="historia">
+    <div class="wave-divider"><svg viewBox="0 0 400 20" preserveAspectRatio="none"><path d="M0 20 Q100 0 200 10 T400 20 V20 H0 Z" fill="var(--olive)"/></svg></div>
+    <img class="divider-heart" src="flora-heart.png" alt="" aria-hidden="true">
+
+    <p class="story-copy">Nuestra historia sigue escribiéndose, y con el amor que nos une, la ilusión de nuestras familias y las ganas de celebrar, queremos que seas parte de este nuevo capítulo.</p>
+    <p class="date-recap">Sábado 10 de octubre de 2026 · 4:00 PM</p>
+
+    <p class="countdown-label">Faltan</p>
+    <div class="countdown-grid">
+      <div class="count-unit"><span id="cd-days">00</span><label>Días</label></div>
+      <div class="count-unit"><span id="cd-hours">00</span><label>Horas</label></div>
+      <div class="count-unit"><span id="cd-mins">00</span><label>Min</label></div>
+      <div class="count-unit"><span id="cd-secs">00</span><label>Seg</label></div>
+    </div>
+  </section>
+
+  <!-- ================= UBICACIÓN + ITINERARIO ================= -->
+  <section class="block-cream" id="ubicacion">
+    <div class="wave-divider"><svg viewBox="0 0 400 20" preserveAspectRatio="none"><path d="M0 20 Q100 0 200 10 T400 20 V20 H0 Z" fill="var(--cream)"/></svg></div>
+    <p class="eyebrow">Cómo llegar</p>
+    <h2 class="section-title">Hacienda La Montaña</h2>
+    <p class="venue-address">Km 1.7 vía Manas–Molinos, Cajicá, Cundinamarca, Colombia</p>
+    <div class="btn-row">
+      <a class="btn btn-solid" id="mapsBtn" href="#" target="_blank" rel="noopener">Google Maps</a>
+      <a class="btn btn-outline" id="wazeBtn" href="#" target="_blank" rel="noopener">Waze</a>
+    </div>
+
+    <div class="itin-head">
+      <span class="itin-pre">el</span>
+      <h2 class="section-title itin-title">Itinerario</h2>
+      <span class="itin-heart">♡</span>
+    </div>
+    <div class="tl">
+      <div class="tl-row">
+        <div class="tl-icon"><svg viewBox="0 0 24 24"><use href="#icon-rings" xlink:href="#icon-rings"/></svg></div>
+        <div class="tl-dot"></div>
+        <div class="tl-text"><span class="tl-time">4:00 PM</span><span class="tl-label">Ceremonia</span></div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-icon"><svg viewBox="0 0 24 24"><use href="#icon-cocktail" xlink:href="#icon-cocktail"/></svg></div>
+        <div class="tl-dot"></div>
+        <div class="tl-text"><span class="tl-time">5:00 PM</span><span class="tl-label">Cóctel de bienvenida</span></div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-icon"><svg viewBox="0 0 24 24"><use href="#icon-sparkle" xlink:href="#icon-sparkle"/></svg></div>
+        <div class="tl-dot"></div>
+        <div class="tl-text"><span class="tl-time">5:45 PM</span><span class="tl-label">Entrada de los novios</span></div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-icon"><svg viewBox="0 0 24 24"><use href="#icon-toast" xlink:href="#icon-toast"/></svg></div>
+        <div class="tl-dot"></div>
+        <div class="tl-text"><span class="tl-time">6:00 PM</span><span class="tl-label">Brindis</span></div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-icon"><svg viewBox="0 0 24 24"><use href="#icon-plate" xlink:href="#icon-plate"/></svg></div>
+        <div class="tl-dot"></div>
+        <div class="tl-text"><span class="tl-time">6:45 PM</span><span class="tl-label">Cena</span></div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-icon"><svg viewBox="0 0 24 24"><use href="#icon-party" xlink:href="#icon-party"/></svg></div>
+        <div class="tl-dot"></div>
+        <div class="tl-text"><span class="tl-time">8:15 PM</span><span class="tl-label">Fiesta</span></div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-icon"><svg viewBox="0 0 24 24"><use href="#icon-clock" xlink:href="#icon-clock"/></svg></div>
+        <div class="tl-dot"></div>
+        <div class="tl-text"><span class="tl-time">12:00 AM</span><span class="tl-label">Despedida</span></div>
+      </div>
+    </div>
+    <img class="flora flora--bl flora--itin" src="flora-bl.png" alt="" aria-hidden="true">
+  </section>
+
+  <!-- ================= DRESS CODE ================= -->
+  <section class="block-cream" id="dresscode">
+    <div class="wave-divider"><svg viewBox="0 0 400 20" preserveAspectRatio="none"><path d="M0 20 Q100 0 200 10 T400 20 V20 H0 Z" fill="var(--cream)"/></svg></div>
+    <img class="dresscode-art" src="dresscode.png" alt="Código de vestimenta: formal de jardín. Caballeros, traje formal, evitar beige y verde oliva. Damas, vestido formal o cóctel elegante, evitar blanco, beige, rojo y verde oliva." loading="lazy">
+  </section>
+
+  <!-- ================= LLUVIA DE SOBRES + INFO ================= -->
+  <section class="block-cream" id="sobres">
+    <div class="wave-divider"><svg viewBox="0 0 400 20" preserveAspectRatio="none"><path d="M0 20 Q100 0 200 10 T400 20 V20 H0 Z" fill="var(--cream)"/></svg></div>
+    <p class="eyebrow">Un detalle</p>
+    <h2 class="section-title">Lluvia de sobres</h2>
+    <div class="sobres-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-envelope" xlink:href="#icon-envelope"/></svg></div>
+    <p class="sobres-copy">Tu compañía ese día ya es un regalo enorme para nosotros. Si quieres tener un detalle adicional, encontrarás un buzón especial para sobres durante la celebración.</p>
+
+  </section>
+
+  <!-- ================= RSVP ================= -->
+  <section class="block-olive" id="rsvp">
+    <div class="wave-divider"><svg viewBox="0 0 400 20" preserveAspectRatio="none"><path d="M0 20 Q100 0 200 10 T400 20 V20 H0 Z" fill="var(--olive)"/></svg></div>
+    <p class="eyebrow">Confirmación</p>
+    <h2 class="section-title">Confirma tu asistencia</h2>
+
+    <p class="greet-name" id="greetName" style="display:none;"></p>
+    <div class="seats-block" id="seatsBlock" style="display:none;">
+      <svg class="seats-icon" viewBox="0 0 52 44" aria-hidden="true">
+        <rect x="22" y="6" width="17" height="28" rx="3" transform="rotate(14 30 20)" fill="var(--olive-pastel)" opacity=".9"/>
+        <rect x="10" y="7" width="17" height="28" rx="3" fill="var(--olive)" stroke="var(--ink-on-olive)" stroke-width="1.4"/>
+      </svg>
+      <p class="seats-label">Tenemos reservados</p>
+      <p class="seats-line"><span>para ti</span><span class="seats-box" id="seatsCount"></span><span>lugares</span></p>
+    </div>
+
+    <p class="rsvp-copy">Agradecemos que confirmes tu asistencia antes del <strong>15 de septiembre de 2026</strong>.</p>
+    <p class="rsvp-copy rsvp-copy--soft" id="seatsHint">Esta invitación es válida únicamente para los cupos indicados.</p>
+
+    <img class="divider-heart" src="flora-heart.png" alt="" aria-hidden="true" style="margin-top:var(--sp-4);margin-bottom:0;">
+    <p class="adults-note"><em>Adoramos a sus hijos, pero creemos que necesitan una noche libre.</em><b>Solo adultos, por favor</b></p>
+  </section>
+
+  <!-- ================= CALENDARIO ================= -->
+  <section class="block-cream" id="calendario">
+    <div class="wave-divider"><svg viewBox="0 0 400 20" preserveAspectRatio="none"><path d="M0 20 Q100 0 200 10 T400 20 V20 H0 Z" fill="var(--cream)"/></svg></div>
+    <p class="eyebrow">Guarda la fecha</p>
+    <h2 class="section-title">No se te olvide</h2>
+    <p class="dc-sub" style="color:var(--ink-soft)">Agrega nuestra boda a tu calendario para que no se te pase.</p>
+    <div class="btn-row">
+      <button class="btn btn-outline" id="btnGCal">Google Calendar</button>
+      <button class="btn btn-outline" id="btnICS">Apple / Outlook (.ics)</button>
+    </div>
+  </section>
+
+  <!-- ================= FOOTER ================= -->
+  <section class="block-olive" id="footer">
+    <div class="wave-divider"><svg viewBox="0 0 400 20" preserveAspectRatio="none"><path d="M0 20 Q100 0 200 10 T400 20 V20 H0 Z" fill="var(--olive)"/></svg></div>
+    <img class="flora flora--tr" src="flora-tr.png" alt="" aria-hidden="true">
+    <img class="flora flora--bl" src="flora-bl.png" alt="" aria-hidden="true">
+    <p class="closing-quote">Esperamos contar con tu presencia.<br>¡Gracias por ser parte de nuestra historia!</p>
+    <div class="photo-arch photo-arch--inverse">
+      <img src="foto-cierre.jpg" alt="Milena y Herbert" loading="lazy">
+    </div>
+    <p class="footer-names">Milena &amp; Herbert</p>
+    <p class="footer-sub">10 · 10 · 2026 · 4:00 PM — Cajicá, Colombia</p>
+  </section>
+
+</div>
+
+<button class="music-fab" id="musicToggle" aria-label="Reproducir o silenciar la música">♪</button>
+<audio id="bgAudio" src="Mis_ojitos.mp3" loop preload="metadata" playsinline webkit-playsinline></audio>
+
+<script>
+(function(){
+  'use strict';
+
+  var WEDDING_DATETIME = new Date('2026-10-10T16:00:00-05:00');
+  var EVENT_DURATION_HOURS = 8;
+  var VENUE_QUERY = 'Hacienda La Montaña, Km 1.7 vía Manas Molinos, Cajicá, Cundinamarca, Colombia';
+
+  document.getElementById('mapsBtn').href = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(VENUE_QUERY);
+  document.getElementById('wazeBtn').href = 'https://waze.com/ul?q=' + encodeURIComponent(VENUE_QUERY) + '&navigate=yes';
+
+  var progressFill = document.getElementById('progressFill');
+  function updateProgress(){
+    var doc = document.documentElement;
+    var scrollTop = window.scrollY || doc.scrollTop;
+    var max = doc.scrollHeight - doc.clientHeight;
+    progressFill.style.width = (max > 0 ? (scrollTop / max) * 100 : 0) + '%';
+  }
+  window.addEventListener('scroll', updateProgress, { passive:true });
+  updateProgress();
+
+  document.getElementById('scrollCue').addEventListener('click', function(){
+    document.getElementById('intro').scrollIntoView({ behavior:'smooth' });
+  });
+
+  var revealTargets = document.querySelectorAll('section');
+  if ('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting){ entry.target.classList.add('revealed'); io.unobserve(entry.target); }
+      });
+    }, { threshold:0.15 });
+    for (var i = 0; i < revealTargets.length; i++){ io.observe(revealTargets[i]); }
+  } else {
+    for (var j = 0; j < revealTargets.length; j++){ revealTargets[j].classList.add('revealed'); }
+  }
+
+  var elDays = document.getElementById('cd-days');
+  var elHours = document.getElementById('cd-hours');
+  var elMins = document.getElementById('cd-mins');
+  var elSecs = document.getElementById('cd-secs');
+  function pad(n){ return (n < 10 ? '0' : '') + n; }
+  function tickCountdown(){
+    var now = new Date();
+    var diff = WEDDING_DATETIME.getTime() - now.getTime();
+    if (diff <= 0){
+      elDays.textContent = '00'; elHours.textContent = '00'; elMins.textContent = '00'; elSecs.textContent = '00';
+      clearInterval(countdownInterval);
+      return;
+    }
+    var totalSeconds = Math.floor(diff / 1000);
+    elDays.textContent = pad(Math.floor(totalSeconds / 86400));
+    elHours.textContent = pad(Math.floor((totalSeconds % 86400) / 3600));
+    elMins.textContent = pad(Math.floor((totalSeconds % 3600) / 60));
+    elSecs.textContent = pad(totalSeconds % 60);
+  }
+  tickCountdown();
+  var countdownInterval = setInterval(tickCountdown, 1000);
+
+  /* PERSONALIZACIÓN POR INVITADO (?invitado=Nombre&cupos=N) */
+  function getParam(name){
+    var m = new RegExp('[?&]' + name + '=([^&#]*)').exec(window.location.search);
+    return m ? decodeURIComponent(m[1].replace(/\+/g, ' ')) : null;
+  }
+  var guestName = getParam('invitado');
+  var guestSeats = parseInt(getParam('cupos'), 10);
+  if (guestName){
+    var greetEl = document.getElementById('greetName');
+    greetEl.textContent = '¡Hola, ' + guestName + '!';
+    greetEl.style.display = 'block';
+  }
+  if (guestSeats && guestSeats > 0){
+    document.getElementById('seatsCount').textContent = guestSeats;
+    document.getElementById('seatsBlock').style.display = 'block';
+    document.getElementById('seatsHint').style.display = 'none';
+  }
+
+  function toUTCStamp(date){ return date.toISOString().replace(/[-:]/g,'').split('.')[0] + 'Z'; }
+  var eventEnd = new Date(WEDDING_DATETIME.getTime() + EVENT_DURATION_HOURS * 60 * 60 * 1000);
+  var eventTitle = 'Boda de Milena & Herbert';
+  var eventLocation = VENUE_QUERY;
+  var eventDetails = 'Nos casamos y queremos que nos acompañes. Ceremonia a las 4:00 PM.';
+  document.getElementById('btnGCal').addEventListener('click', function(){
+    var url = 'https://calendar.google.com/calendar/render?action=TEMPLATE'
+      + '&text=' + encodeURIComponent(eventTitle)
+      + '&dates=' + toUTCStamp(WEDDING_DATETIME) + '/' + toUTCStamp(eventEnd)
+      + '&details=' + encodeURIComponent(eventDetails)
+      + '&location=' + encodeURIComponent(eventLocation);
+    window.open(url, '_blank');
+  });
+  document.getElementById('btnICS').addEventListener('click', function(){
+    var ics = ['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Milena & Herbert//Boda//ES','BEGIN:VEVENT',
+      'UID:' + Date.now() + '@boda-milena-herbert','DTSTAMP:' + toUTCStamp(new Date()),
+      'DTSTART:' + toUTCStamp(WEDDING_DATETIME),'DTEND:' + toUTCStamp(eventEnd),
+      'SUMMARY:' + eventTitle,'LOCATION:' + eventLocation,'DESCRIPTION:' + eventDetails,
+      'END:VEVENT','END:VCALENDAR'].join('\r\n');
+    var blob = new Blob([ics], { type:'text/calendar;charset=utf-8' });
+    var link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = 'Boda-Milena-Herbert.ics';
+    document.body.appendChild(link); link.click(); document.body.removeChild(link);
+    setTimeout(function(){ URL.revokeObjectURL(link.href); }, 2000);
+  });
+
+  /* MÚSICA DE FONDO */
+  var musicBtn = document.getElementById('musicToggle');
+  var audioEl = document.getElementById('bgAudio');
+
+  function setPlayingUI(playing){
+    musicBtn.classList.toggle('playing', playing);
+    musicBtn.textContent = playing ? '❚❚' : '♪';
+    musicBtn.setAttribute('aria-label', playing ? 'Silenciar la música' : 'Reproducir la música');
+  }
+  audioEl.addEventListener('play', function(){ setPlayingUI(true); });
+  audioEl.addEventListener('pause', function(){ setPlayingUI(false); });
+
+  var fallbackArmed = false;
+  function armFallback(){
+    if (fallbackArmed) return;
+    fallbackArmed = true;
+    var evts = ['click','touchstart','scroll','keydown'];
+    function onFirstInteraction(){
+      evts.forEach(function(ev){ document.removeEventListener(ev, onFirstInteraction); });
+      audioEl.play().catch(function(){});
+    }
+    evts.forEach(function(ev){ document.addEventListener(ev, onFirstInteraction, { passive:true, once:true }); });
+  }
+  function tryPlay(){
+    var p = audioEl.play();
+    if (p && p.catch){ p.catch(function(){ armFallback(); }); }
+  }
+  window.addEventListener('load', tryPlay);
+  musicBtn.addEventListener('click', function(){
+    if (audioEl.paused){ audioEl.play().catch(function(){}); } else { audioEl.pause(); }
+  });
+
+  var toastEl = document.getElementById('toast');
+  var toastTimer = null;
+  function showToast(message){
+    toastEl.textContent = message;
+    toastEl.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function(){ toastEl.classList.remove('show'); }, 3200);
+  }
+
+})();
+</script>
+</body>
+</html>
