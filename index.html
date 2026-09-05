@@ -92,6 +92,18 @@
   .garland{ display:block; width:100%; max-width:320px; height:auto; margin:0 auto var(--sp-3); }
   section > *:not(.floral):not(.flora):not(.wave-divider){ position:relative; z-index:1; }
 
+  /* ============ BIENVENIDA ============ */
+  body.locked{ overflow:hidden; }
+  .welcome{ position:fixed; top:0; left:0; right:0; bottom:0; width:100%; height:100%; z-index:100; background:var(--cream); display:flex; align-items:center; justify-content:center; text-align:center; padding:var(--sp-4); transition:opacity .7s var(--ease), visibility .7s; }
+  .welcome.hide{ opacity:0; visibility:hidden; pointer-events:none; }
+  .welcome .flora--tl{ width:190px; }
+  .welcome .flora--br{ width:140px; }
+  .welcome-inner{ position:relative; z-index:1; max-width:340px; }
+  .welcome .script-names{ margin:var(--sp-3) 0; }
+  .welcome-date{ font-size:.82rem; letter-spacing:.2em; text-transform:uppercase; color:var(--ink-soft); margin:0 0 var(--sp-4); }
+  .welcome-greet{ font-style:italic; font-size:1.2rem; color:var(--olive-deep); margin:calc(-1*var(--sp-2)) 0 var(--sp-4); }
+  .welcome-btn{ flex:none; padding:14px 34px; font-size:1rem; }
+
   /* ============ COVER ============ */
   .cover{ text-align:center; clip-path:polygon(0 0,100% 0,100% 86%,50% 100%,0 86%); padding:120px var(--sp-4) 150px; }
   .cover-date{ font-size:.78rem; letter-spacing:.2em; text-transform:uppercase; color:var(--ink-on-olive-soft); margin-top:var(--sp-2); }
@@ -263,7 +275,7 @@
   }
 </style>
 </head>
-<body>
+<body class="locked">
 
 <svg class="sr-only-defs" aria-hidden="true">
   <defs>
@@ -290,6 +302,18 @@
 
 <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
 <div class="toast" id="toast"></div>
+
+<div class="welcome" id="welcome">
+  <img class="flora flora--tl" src="flora-tl.png" alt="" aria-hidden="true">
+  <img class="flora flora--br" src="flora-br.png" alt="" aria-hidden="true">
+  <div class="welcome-inner">
+    <p class="eyebrow">Nuestra boda</p>
+    <div class="script-names"><span>Milena</span><span class="amp">&amp;</span><span>Herbert</span></div>
+    <p class="welcome-date">Sábado 10 de octubre de 2026</p>
+    <p class="welcome-greet" id="welcomeGreet" style="display:none;"></p>
+    <button class="btn btn-solid welcome-btn" id="openInvite">Abrir invitación</button>
+  </div>
+</div>
 
 <div class="app">
 
@@ -557,6 +581,9 @@
     var greetEl = document.getElementById('greetName');
     greetEl.textContent = '¡Hola, ' + guestName + '!';
     greetEl.style.display = 'block';
+    var wg = document.getElementById('welcomeGreet');
+    wg.textContent = 'Con cariño para ' + guestName;
+    wg.style.display = 'block';
   }
   if (guestSeats && guestSeats > 0){
     document.getElementById('seatsCount').textContent = guestSeats;
@@ -618,7 +645,14 @@
     var p = audioEl.play();
     if (p && p.catch){ p.catch(function(){ armFallback(); }); }
   }
-  window.addEventListener('load', tryPlay);
+  var welcome = document.getElementById('welcome');
+  document.getElementById('openInvite').addEventListener('click', function(){
+    var p = audioEl.play();
+    if (p && p.catch){ p.catch(function(){ armFallback(); }); }
+    welcome.classList.add('hide');
+    document.body.classList.remove('locked');
+    window.scrollTo(0, 0);
+  });
   musicBtn.addEventListener('click', function(){
     if (audioEl.paused){ audioEl.play().catch(function(){}); } else { audioEl.pause(); }
   });
