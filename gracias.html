@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#4B5C33">
+<title>Gracias · Milena & Herbert</title>
+<meta property="og:title" content="Gracias por acompañarnos · Milena & Herbert">
+<meta property="og:description" content="Sus fotos de nuestra boda · 10 de octubre de 2026">
+<meta property="og:image" content="foto-gracias.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&display=swap" rel="stylesheet">
+<style>
+:root{--olive:#4B5C33;--olive-deep:#3A4626;--sage:#8BA696;--blush:#DDA6A6;--blush-soft:#F1DEDA;--champagne:#D9CBA8;--gold:#B8964F;--cream:#F8F5EC;--cream-deep:#EFE8D6;--ink:#3A3226;--ink-soft:#79705D;--ink-on-olive:#F3EFE2;--ink-on-olive-soft:#C9D2B5;--line:rgba(59,66,40,.22);--line-on-olive:rgba(243,239,226,.35);--shadow-soft:0 10px 30px rgba(45,54,28,.14);--ease:cubic-bezier(.22,.9,.32,1)}
+*{box-sizing:border-box}
+html{font-size:18px}
+body{margin:0;font-family:'Cormorant Garamond',serif;color:var(--ink);background:var(--cream);-webkit-font-smoothing:antialiased}
+.app{position:relative;max-width:480px;margin:0 auto;overflow:hidden;background:var(--cream)}
+@media (min-width:560px){body{padding:40px 16px;background:var(--cream-deep)}.app{box-shadow:var(--shadow-soft)}}
+section{position:relative;overflow:hidden;padding:72px 32px;opacity:0;transform:translateY(16px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+section.revealed{opacity:1;transform:none}
+section>:not(.flora){position:relative;z-index:1}
+.flora{position:absolute;pointer-events:none;z-index:0;height:auto}
+.flora--tl{top:0;left:0;width:170px}.flora--tr{top:0;right:0;width:150px}
+.flora--bl{bottom:0;left:0;width:180px}.flora--br{bottom:0;right:0;width:150px}
+.eyebrow{font-weight:600;letter-spacing:.26em;text-transform:uppercase;font-size:.7rem;margin:0 0 12px;text-align:center;color:var(--olive)}
+.divider-heart{display:block;width:150px;height:auto;margin:0 auto 28px}
+
+/* Portada */
+.cover{text-align:center;padding:130px 32px 70px}
+.gracias{font-style:italic;font-weight:500;font-size:3.3rem;line-height:1;color:var(--olive-deep);margin:6px 0 4px}
+.script-names{margin:18px 0 10px}
+.script-names span{display:block;font-style:italic;font-weight:500;font-size:2.15rem;color:var(--olive-deep);line-height:1.1}
+.script-names .amp{font-size:1.2rem;color:var(--blush);margin:2px 0}
+.cover-date{font-size:.76rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-soft);margin:14px 0 0}
+.sprig-row{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:22px}
+.sprig-row img{width:22px;height:auto}.sprig-row img:last-child{transform:scaleX(-1)}
+.sprig-row span{width:46px;height:1px;background:var(--line)}
+
+/* Saludo + foto */
+.greet{padding-top:20px;text-align:center}
+.saludo{font-style:italic;font-weight:500;font-size:1.65rem;color:var(--olive-deep);margin:0 0 22px;line-height:1.25}
+.photo-frame{position:relative;margin:0 auto 30px;max-width:340px;padding:10px;background:#fff;border-radius:16px;box-shadow:var(--shadow-soft)}
+.photo-frame img.foto{display:block;width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:10px}
+.photo-frame .flora{z-index:2}
+.photo-frame .ph-tl{top:-38px;left:-42px;width:120px}
+.photo-frame .ph-br{bottom:-40px;right:-40px;width:115px}
+.mensaje{font-size:1.08rem;line-height:1.75;color:var(--ink-soft);margin:0 0 14px}
+.mensaje em{color:var(--olive-deep)}
+
+/* Botones */
+.fotos{background:var(--olive);color:var(--ink-on-olive);text-align:center;clip-path:polygon(0 5%,50% 0,100% 5%,100% 100%,0 100%);padding-top:96px}
+.fotos .eyebrow{color:var(--ink-on-olive-soft)}
+.fotos h2{font-weight:500;font-size:1.75rem;margin:0 0 10px;color:var(--ink-on-olive)}
+.fotos p{font-size:1rem;line-height:1.65;color:var(--ink-on-olive-soft);margin:0 0 28px}
+.fotos .divider-heart{filter:brightness(1.35) saturate(.8)}
+.btn{display:block;width:100%;max-width:330px;margin:0 auto 14px;padding:15px 18px;border-radius:999px;font-family:inherit;font-size:1rem;font-weight:600;letter-spacing:.04em;text-decoration:none;transition:transform .2s var(--ease),opacity .2s}
+.btn:active{transform:scale(.98)}
+.btn-solid{background:var(--blush-soft);color:var(--olive-deep)}
+.btn-ghost{border:1px solid var(--line-on-olive);color:var(--ink-on-olive)}
+.btn.pending{opacity:.55;pointer-events:none}
+.btn small{display:block;font-weight:500;font-size:.75rem;letter-spacing:.06em;opacity:.8;margin-top:2px}
+.tip{font-size:.85rem!important;font-style:italic;margin:18px 0 0!important}
+
+.ayuda{max-width:340px;margin:22px auto 0;text-align:left;border:1px solid var(--line-on-olive);border-radius:14px;padding:12px 16px;color:var(--ink-on-olive-soft)}
+.ayuda summary{cursor:pointer;font-weight:600;color:var(--ink-on-olive);text-align:center;list-style:none}
+.ayuda summary::-webkit-details-marker{display:none}
+.ayuda summary::after{content:" ▾";font-size:.8em}
+.ayuda[open] summary::after{content:" ▴"}
+.ayuda h3{font-size:1rem;font-weight:600;color:var(--blush-soft);margin:16px 0 6px}
+.ayuda ol{margin:0;padding-left:20px;font-size:.95rem;line-height:1.55}
+.ayuda li{margin-bottom:6px}
+.ayuda b{color:var(--ink-on-olive)}
+.fotos .ayuda .nota{font-size:.88rem;font-style:italic;margin:12px 0 0}
+
+/* Cierre */
+.cierre{text-align:center;padding:72px 32px 150px}
+.cierre-texto{font-style:italic;font-size:1.3rem;line-height:1.5;color:var(--olive-deep);margin:0 0 18px}
+.firma{font-size:.78rem;letter-spacing:.24em;text-transform:uppercase;color:var(--ink-soft);margin:0}
+.mono{font-style:italic;font-size:2.4rem;color:var(--gold);margin:14px 0 0}
+</style>
+</head>
+<body>
+<div class="app">
+
+  <section class="cover">
+    <img class="flora flora--tl" src="flora-tl.png" alt="" aria-hidden="true">
+    <img class="flora flora--tr" src="flora-tr.png" alt="" aria-hidden="true">
+    <p class="eyebrow">Con el corazón lleno</p>
+    <p class="gracias">Gracias</p>
+    <div class="script-names"><span>Milena</span><span class="amp">&amp;</span><span>Herbert</span></div>
+    <p class="cover-date">10 · 10 · 2026 · Hacienda La Montaña</p>
+    <div class="sprig-row"><img src="flora-sprig.png" alt=""><span></span><img src="flora-sprig.png" alt=""></div>
+  </section>
+
+  <section class="greet">
+    <p class="saludo" id="saludo">Querida familia y amigos</p>
+    <div class="photo-frame">
+      <img class="flora ph-tl" src="flora-tl.png" alt="" aria-hidden="true">
+      <img class="foto" src="foto-gracias.jpg" alt="Milena y Herbert el día de su boda">
+      <img class="flora ph-br" src="flora-br.png" alt="" aria-hidden="true">
+    </div>
+    <p class="mensaje" id="msg1"></p>
+    <p class="mensaje" id="msg2"></p>
+  </section>
+
+  <section class="fotos">
+    <img class="divider-heart" src="flora-heart.png" alt="" aria-hidden="true">
+    <p class="eyebrow">Nuestros recuerdos</p>
+    <h2 id="fotosTitulo">Sus fotos de la boda</h2>
+    <p id="fotosTexto">Guardamos para ustedes las fotos en las que aparecen, en su calidad original para que las conserven o las impriman.</p>
+    <a class="btn btn-solid" id="btnFotos" href="#" target="_blank" rel="noopener">Ver y descargar sus fotos</a>
+    <a class="btn btn-ghost" id="btnDetalles" href="#" target="_blank" rel="noopener">Detalles de la boda<small>Anillos, flores, decoración y el lugar</small></a>
+    <p class="tip">Las fotos estarán disponibles hasta el <span id="vence">31 de enero de 2027</span>.</p>
+    <details class="ayuda">
+      <summary>¿Cómo descargo las fotos?</summary>
+      <p class="nota">No necesitas cuenta ni contraseña. Si la página te sugiere instalar una app, puedes cerrar ese aviso.</p>
+      <h3>Desde el celular, foto por foto</h3>
+      <ol>
+        <li>Toca el botón de las fotos. Se abre la carpeta en el navegador.</li>
+        <li>Toca la foto que quieras para verla en grande.</li>
+        <li>Toca <b>Descargar</b> (la flecha hacia abajo, o los tres puntos <b>⋯ → Descargar</b>).</li>
+        <li><b>iPhone:</b> la foto queda en <b>Archivos → Descargas</b>. Para pasarla a tu galería, ábrela, toca <b>Compartir</b> y luego <b>Guardar imagen</b>.<br><b>Android:</b> queda en tu galería o en la carpeta Descargas.</li>
+      </ol>
+      <h3>Todas las fotos de una vez (mejor en computador)</h3>
+      <ol>
+        <li>Abre el link desde un computador.</li>
+        <li>Sin seleccionar ninguna foto, haz clic en <b>Descargar</b>, en la barra de arriba.</li>
+        <li>Se descarga un archivo <b>.zip</b>. Haz doble clic para abrirlo y ahí estarán todas las fotos en su calidad original.</li>
+      </ol>
+      <p class="nota">Son fotos en alta resolución: te recomendamos descargarlas conectado a wifi.</p>
+    </details>
+  </section>
+
+  <section class="cierre">
+    <img class="flora flora--bl" src="flora-bl.png" alt="" aria-hidden="true">
+    <img class="flora flora--br" src="flora-br.png" alt="" aria-hidden="true">
+    <p class="cierre-texto">Cada abrazo, cada risa y cada baile<br>hicieron de ese día algo inolvidable.</p>
+    <p class="firma">Con todo nuestro cariño</p>
+    <p class="mono">M &amp; H</p>
+  </section>
+
+</div>
+<script>
+/* ===== Configuración: completar los links de OneDrive ===== */
+const DETALLES = "https://netorgft18584914-my.sharepoint.com/:f:/g/personal/gerencia_valdel_co/IgALVB-QJrIFR4b2wuO7EkNcAejxK-XW62jDTEOm9OhWAt8?e=lUqmjX"; // carpeta "17 Detalles de la boda"
+const VENCE = "31 de enero de 2027";
+// plural: true = "ustedes" · false = "tú"
+const FAMILIAS = {
+  "01": {saludo:"Queridas Jacqueline, Carolina y Yolanda", plural:true,  fotos:"https://netorgft18584914-my.sharepoint.com/:f:/g/personal/gerencia_valdel_co/IgAEwyv_kGsBSY9ZrqjV2pyuAZq1lFJZeRjUYCCs_kEFw_8?e=eKfQhB"},
+  "02": {saludo:"Queridos Marcela y Juan David",           plural:true,  fotos:"https://netorgft18584914-my.sharepoint.com/:f:/g/personal/gerencia_valdel_co/IgAAhKd2Lv6qR5Kj7fqnMk7KATi1K9CxXc4duK4cBntjHX8?e=83e9dj"},
+  "03": {saludo:"Querido Jorge",                           plural:false, fotos:"https://netorgft18584914-my.sharepoint.com/:f:/g/personal/gerencia_valdel_co/IgDOlxL-bfz0R4fRFPYaDXfLAZk8F3k3QRjXqPHWMwtWwb0?e=6efKWM"},
+  "04": {saludo:"Queridos Fernando y Adriana",             plural:true,  fotos:"https://netorgft18584914-my.sharepoint.com/:f:/g/personal/gerencia_valdel_co/IgBNPXue7pDBTbZXippZS_29AXaHWy23ey_0HZ8fsl87Z9U?e=dus8Go"},
+  "05": {saludo:"Queridos María Camila y Brian",           plural:true,  fotos:"https://netorgft18584914-my.sharepoint.com/:f:/g/personal/gerencia_valdel_co/IgD3Xja1A0aeSowYBlB5PeBrATERe7yiufnhtFKVXtNCmQ4?e=eSJIPL"},
+  "06": {saludo:"Queridos Germán y Jenny",                 plural:true,  fotos:"https://netorgft18584914-my.sharepoint.com/:f:/g/personal/gerencia_valdel_co/IgBzmKuZsMnWQ4b91OK3lPGjAeYtZXw2zyfsUrUWP5X4ZaA?e=i9Apch"},
+  "07": {saludo:"Queridos Guillermo, Claudia y Mateo",     plural:true,  fotos:"https://netorgft18584914-my.sharepoint.com/:f:/g/personal/gerencia_valdel_co/IgDd5e3dXU0KTpjGOvhmn50yAWvBdkEQbgpXQQoFBGLWt6M?e=i5rwky"},
+  "08": {saludo:"Queridos Leonardo y Nicole",              plural:true,  fotos:"https://netorgft18584914-my.sharepoint.com/:f:/g/personal/gerencia_valdel_co/IgDOUZvOwdWPR4LI5mJTNXa9AYBOaKpuRe5v5-c6zzv_obs?e=mSMSie"},
+  "09": {saludo:"Queridos Heriberto y Aracelly",           plural:true,  fotos:"https://netorgft18584914-my.sharepoint.com/:f:/g/personal/gerencia_valdel_co/IgD__WfgXMSGTLlvjKPpbWIQAeCIvN1uYmnjZB_8_zuUSBE?e=zsQ3rK"},
+  "10": {saludo:"Queridos Ana María e Imandock",           plural:true,  fotos:"https://netorgft18584914-my.sharepoint.com/:f:/g/personal/gerencia_valdel_co/IgDU7HW-OBAwRbGuZoToiHmyATovrMkrEyv0IA7D4c14gAQ?e=850hqx"},
+  "11": {saludo:"Querido Darío",                           plural:false, fotos:"https://netorgft18584914-my.sharepoint.com/:f:/g/personal/gerencia_valdel_co/IgAXYtiM9gyQQpykHUb2yu_IAWIPNvO0Iceu6Yi1oZfrpyI?e=lMoCl8"},
+  "12": {saludo:"Queridos Andrés y Damaris",               plural:true,  fotos:"https://netorgft18584914-my.sharepoint.com/:f:/g/personal/gerencia_valdel_co/IgBas_X7_jliRbYnBZxk0qFuASI6lOm5_eOJBew9X9-6bRY?e=mqMV6C"},
+  "13": {saludo:"Querida Sandra",                          plural:false, fotos:"https://netorgft18584914-my.sharepoint.com/:f:/g/personal/gerencia_valdel_co/IgDXy7SLEj1oSY21qrrTvfhyAYdqK4fvN_TwgaIzv_ozS7E?e=Gm1sHp"},
+  "14": {saludo:"Queridos Santiago y Nathalia",            plural:true,  fotos:"https://netorgft18584914-my.sharepoint.com/:f:/g/personal/gerencia_valdel_co/IgC9nT-ao--nTq7TN98Pcdp0AR1TiVitT991_rS-Dpuhxtc?e=Yp6RmR"},
+  "15": {saludo:"Queridos Daniel y Adriana",               plural:true,  fotos:"https://netorgft18584914-my.sharepoint.com/:f:/g/personal/gerencia_valdel_co/IgDemTUsI63DT4LCbdznKNcYAdZq3rgg1GhksoH-9dtkGUU?e=Z9goPq"}
+};
+// Invitados virtuales: link ?v=1 … ?v=10
+const NOVIOS = ""; // link de la carpeta "Milena & Herbert" (selección de fotos de los novios)
+const VIRTUALES = {
+  "1":  {saludo:"Querido Mauricio",         ciudad:"Madrid",          hora:"las 11:00 de la noche de tu sábado"},
+  "2":  {saludo:"Querida Claudia",          ciudad:"Madrid",          hora:"las 11:00 de la noche de tu sábado"},
+  "3":  {saludo:"Querida Nancy",            ciudad:"Fuengirola",      hora:"las 11:00 de la noche de tu sábado"},
+  "4":  {saludo:"Querido Camilo",           ciudad:"Madrid",          hora:"las 11:00 de la noche de tu sábado"},
+  "5":  {saludo:"Querida María Angélica",   ciudad:"Oporto",          hora:"las 10:00 de la noche de tu sábado"},
+  "6":  {saludo:"Querido Angelo",           ciudad:"Dublín",          hora:"las 10:00 de la noche de tu sábado"},
+  "7":  {saludo:"Querido Javier",           ciudad:"Atlanta",         hora:"las 5:00 de la tarde de tu sábado"},
+  "8":  {saludo:"Querida Laura",            ciudad:"Chicago",         hora:"las 4:00 de la tarde de tu sábado"},
+  "9":  {saludo:"Querido Danny",            ciudad:"Salt Lake City",  hora:"las 3:00 de la tarde de tu sábado"},
+  "10": {saludo:"Querida Viviana",          ciudad:"Katherine",       hora:"las 6:30 de la mañana de tu domingo"}
+};
+/* ========================================================== */
+const TXT = {
+  true:  {m1:"El 10 de octubre prometimos caminar juntos toda la vida, y <em>tenerlos ahí</em> hizo ese día todavía más especial.",
+          m2:"Gracias por acompañarnos, por su cariño y por cada momento compartido. Aquí les dejamos los recuerdos que guardamos con ustedes.",
+          t:"Sus fotos de la boda", p:"Guardamos para ustedes las fotos en las que aparecen, en su calidad original para que las conserven o las impriman.", b:"Ver y descargar sus fotos"},
+  false: {m1:"El 10 de octubre prometimos caminar juntos toda la vida, y <em>tenerte ahí</em> hizo ese día todavía más especial.",
+          m2:"Gracias por acompañarnos, por tu cariño y por cada momento compartido. Aquí te dejamos los recuerdos que guardamos contigo.",
+          t:"Tus fotos de la boda", p:"Guardamos para ti las fotos en las que apareces, en su calidad original para que las conserves o las imprimas.", b:"Ver y descargar tus fotos"}
+};
+const q = new URLSearchParams(location.search);
+const fam = FAMILIAS[(q.get("f")||"").padStart(2,"0")];
+const t = TXT[fam ? fam.plural : true];
+if (fam) document.getElementById("saludo").textContent = fam.saludo;
+document.getElementById("msg1").innerHTML = t.m1;
+document.getElementById("msg2").textContent = t.m2;
+document.getElementById("fotosTitulo").textContent = t.t;
+document.getElementById("fotosTexto").textContent = t.p;
+document.getElementById("vence").textContent = VENCE;
+const bf = document.getElementById("btnFotos"), bd = document.getElementById("btnDetalles");
+if (fam && fam.fotos) { bf.href = fam.fotos; bf.textContent = t.b; }
+else if (fam) { bf.classList.add("pending"); bf.textContent = fam.plural ? "Sus fotos estarán aquí muy pronto" : "Tus fotos estarán aquí muy pronto"; }
+else { bf.style.display = "none"; }
+if (DETALLES) bd.href = DETALLES; else bd.classList.add("pending");
+const vir = VIRTUALES[q.get("v") || ""];
+if (vir) {
+  document.getElementById("saludo").textContent = vir.saludo;
+  document.getElementById("msg1").innerHTML = `El 10 de octubre prometimos caminar juntos toda la vida, y aunque estabas en ${vir.ciudad}, <em>sentirte cerca</em> hizo ese día todavía más especial.`;
+  document.getElementById("msg2").textContent = `Gracias por acompañarnos a la distancia, a ${vir.hora}. Aquí te dejamos algunos recuerdos para que vivas un poquito de ese día con nosotros.`;
+  document.getElementById("fotosTitulo").textContent = "Recuerdos de nuestra boda";
+  document.getElementById("fotosTexto").textContent = "Escogimos para ti algunas de nuestras fotos favoritas y los detalles del día, en su calidad original.";
+  bf.style.display = ""; bf.classList.remove("pending");
+  if (NOVIOS) { bf.href = NOVIOS; bf.textContent = "Ver fotos de Milena & Herbert"; }
+  else { bf.classList.add("pending"); bf.textContent = "Las fotos estarán aquí muy pronto"; }
+}
+const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("revealed"); io.unobserve(e.target); } }), {threshold:.12});
+document.querySelectorAll("section").forEach(s => io.observe(s));
+</script>
+</body>
+</html>
